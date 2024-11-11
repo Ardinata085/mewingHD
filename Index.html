@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Program</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Styling untuk kotak program */
+        .program-box {
+            width: 150px;
+            height: 150px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        /* Hover effect */
+        .program-box:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        /* Menyembunyikan semua konten program secara default */
+        .program-content {
+            display: none;
+        }
+
+        /* Menampilkan konten program yang dipilih */
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center mt-5">
+        <!-- Nama dan NIM -->
+        <h2>Arya Adinata Utama</h2>
+        <p>NIM: 24010009</p>
+        <h4 class="mb-4">Daftar Program</h4>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="program-box" onclick="showProgram('program1')">Program 1</div>
+            </div>
+            <div class="col-md-3">
+                <div class="program-box" onclick="showProgram('program2')">Program 2</div>
+            </div>
+            <div class="col-md-3">
+                <div class="program-box" onclick="showProgram('program3')">Program 3</div>
+            </div>
+        </div>
+
+        <!-- Konten untuk masing-masing program -->
+        <div id="program1" class="program-content">
+            <h2>Hello World</h2>
+            <h1 id="message"></h1>
+            <script>
+                document.getElementById("message").textContent = "Hello, World!";
+            </script>
+        </div>
+
+        <div id="program2" class="program-content">
+            <h2 class="text-center mb-4">Program Menghitung Luas Persegi Panjang</h2>
+            <form id="luasForm">
+                <div class="mb-3">
+                    <label for="panjang" class="form-label">Masukkan Panjang:</label>
+                    <input type="number" class="form-control" id="panjang" placeholder="Masukkan panjang" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lebar" class="form-label">Masukkan Lebar:</label>
+                    <input type="number" class="form-control" id="lebar" placeholder="Masukkan lebar" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="hitungLuas()">Hitung Luas</button>
+            </form>
+            <div class="mt-4">
+                <h4>Hasil:</h4>
+                <p id="hasilLuas">Luas persegi panjang akan ditampilkan di sini.</p>
+            </div>
+            <script>
+                function hitungLuas() {
+                    const panjang = parseFloat(document.getElementById('panjang').value);
+                    const lebar = parseFloat(document.getElementById('lebar').value);
+                    if (isNaN(panjang) || isNaN(lebar)) {
+                        document.getElementById('hasilLuas').textContent = 'Masukkan panjang dan lebar yang valid.';
+                        return;
+                    }
+                    const luas = panjang * lebar;
+                    document.getElementById('hasilLuas').textContent = 'Luas persegi panjang adalah: ' + luas.toFixed(2);
+                }
+            </script>
+        </div>
+
+        <div id="program3" class="program-content">
+            <h2 class="text-center mb-4">Program Konversi Suhu</h2>
+            <form id="suhuForm">
+                <div class="mb-3">
+                    <label for="celcius" class="form-label">Masukkan Suhu dalam Celcius:</label>
+                    <input type="number" class="form-control" id="celcius" placeholder="Masukkan suhu dalam Celcius"
+                        required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="konversiSuhu()">Konversi</button>
+            </form>
+            <div class="mt-4">
+                <h4>Hasil Konversi:</h4>
+                <p id="hasilFahrenheit">Suhu dalam Fahrenheit: -</p>
+                <p id="hasilKelvin">Suhu dalam Kelvin: -</p>
+            </div>
+            <script>
+                function konversiSuhu() {
+                    const celcius = parseFloat(document.getElementById('celcius').value);
+                    if (isNaN(celcius)) {
+                        alert('Masukkan suhu dalam Celcius yang valid.');
+                        return;
+                    }
+                    const fahrenheit = (celcius * 9 / 5) + 32;
+                    const kelvin = celcius + 273.15;
+                    document.getElementById('hasilFahrenheit').textContent = 'Suhu dalam Fahrenheit: ' + fahrenheit.toFixed(2) + ' °F';
+                    document.getElementById('hasilKelvin').textContent = 'Suhu dalam Kelvin: ' + kelvin.toFixed(2) + ' K';
+                }
+            </script>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan program yang dipilih dan menyembunyikan yang lain
+        function showProgram(programId) {
+            const contents = document.getElementsByClassName('program-content');
+            for (let content of contents) {
+                content.classList.remove('active');
+            }
+            document.getElementById(programId).classList.add('active');
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
